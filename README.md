@@ -4,4 +4,4 @@ This repository contains Software Development Bootcamp project prompts. Referenc
 
 Projects
 
-* [Course Lookup Tool](course-lookup.md)
+* Course Project `course-lookup.md`
