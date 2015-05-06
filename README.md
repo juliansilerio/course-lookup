@@ -16,7 +16,7 @@ This repository contains Software Development Bootcamp project prompts. Referenc
 
 You may want to generate HTML or PDF versions of these projects. To do so, you'll need `pandoc`.
 
-Here's an example of how to convert `course-lookup-interview.` to HTML.
+Here's an example of how to convert `course-lookup-interview.md` to HTML.
 
 ```
 $ pandoc -s -S course-lookup-interview.md -t html5 -o course-lookup-interview.html
