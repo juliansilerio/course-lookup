@@ -108,3 +108,37 @@ The 10 most frequently used words (case insensitive):
 * You may use any functions or libraries to perform this task.
 * Tests are encouraged.
 * Target this application for PHP 5.3+.
+
+The following composer.json file is a good starting point (change MY_BOOTCAMP_COURSE_IMPLEMENTATION to something more personal):
+
+```
+{
+    "name": "ccit/MY_BOOTCAMP_COURSE_IMPLEMENTATION",
+    "license": "GPLv3",
+    "type": "project",
+    "description": "Bootcamp - Course Lookup Tool",
+    "require": {
+        "symfony/console": "2.6.*",
+        "doctrine/orm": "2.4.*",
+        "ddeboer/data-import": "@stable",
+        "codeception/codeception": "@stable"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
+```
+
+Run `composer install` to install the dependencies. Your work should be in the `src/Ccit/MY_BOOTCAMP_COURSE_IMPLEMENTATION` directory structure.
+
+This `composer.json` file provides:
+* The Symfony Console component for writing command line applications
+* The Doctrine ORM for interacting with databases
+* The ddboer data import bundle to make importing the CSV into the database easier
+* Codeception for testing
