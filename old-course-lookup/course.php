@@ -101,10 +101,13 @@
         
         arsort($words);
         $i = 0;
+        $excluded = array('the', 'and', 'in', 'of', 'to', '&');
         while($i<10) {
             $row = each($words);
-            print "$row[0]        $row[1]\n";
-            $i++;
+            if(!in_array($row[0], $excluded)) {
+                print "$row[0]        $row[1]\n";
+                $i++;
+            } 
         }
             
         $db->close();
