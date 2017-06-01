@@ -1,0 +1,21 @@
+{
+    "name": "ccit/course-lookup",
+    "license": "GPLv3",
+    "type": "project",
+    "description": "Bootcamp - Course Lookup Tool",
+    "require": {
+        "symfony/console": "2.6.*",
+        "doctrine/orm": "2.4.*",
+        "ddeboer/data-import": "@stable",
+        "codeception/codeception": "@stable"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
