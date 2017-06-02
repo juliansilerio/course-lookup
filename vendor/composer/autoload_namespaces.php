@@ -31,5 +31,5 @@ return array(
     'Codeception' => array($vendorDir . '/codeception/codeception/src'),
     'Behat\\Mink\\Driver' => array($vendorDir . '/behat/mink-selenium2-driver/src', $vendorDir . '/behat/mink-browserkit-driver/src', $vendorDir . '/behat/mink-goutte-driver/src'),
     'Behat\\Mink' => array($vendorDir . '/behat/mink/src'),
-    '' => array($baseDir . '/src'),
+    '' => array($baseDir . '/'),
 );

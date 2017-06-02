@@ -2,7 +2,8 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use app\service\import_service;
+use App\Command\ImportCommand;
+use App\Command\LookupCommand;
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -18,6 +19,8 @@ $conn = array(
 $em = EntityManager::create($conn, $config);
 
 $application = new Application();
+$application->add(new ImportCommand($em));
+$application->add(new LookupCommand($em));
 $application->run();
 
 ?>

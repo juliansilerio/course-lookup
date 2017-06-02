@@ -1,5 +1,5 @@
 {
-    "name": "ccit/course-lookup",
+    "name": "course-lookup",
     "license": "GPLv3",
     "type": "project",
     "description": "Bootcamp - Course Lookup Tool",
@@ -12,7 +12,7 @@
 
     "autoload": {
         "psr-0": {
-            "": "src/"
+            "": ""
         }
     },
     "config": {

@@ -1,7 +1,8 @@
 <?php
 
-namespace app\service;
+namespace App\Service;
 
+use App\Entity\Course;
 use Doctrine\ORM\EntityManager;
 
 class ImportService {
@@ -11,13 +12,19 @@ class ImportService {
 
     public function __construct($filename, EntityManager $em) {
         $this->filename = $filename;
-        $this->out = $out;
+        //$this->out = $out;
         $this->em = $em;
     }
 
     public function process_csv() {
-        $file = fopen($filename);
-        while(($line=fgetcsv($file)) !== false) {
+        $file = fopen($this->filename, 'r');
+        
+        echo $total=count(file($this->filename)) . "\n";
+        $counter = 0;
+        $bar = "";
+        
+//        $csv = $fgetscsv($
+        while($line=fgetcsv($file)) {
             $department = $line[0];
             $subject = $line[1];
             $prefix = $line[2];
@@ -35,10 +42,16 @@ class ImportService {
             $course->set_points_min($points_min);
             $course->set_points_max($points_max);
 
+            $counter++;
+            $percent = $counter/$total*100;
+            echo $percent . "%\r";
+            
             $this->em->persist($course);
             $this->em->flush();
         }
 
         fclose($file);
            
-    } 
+    }
+} 
+?>
