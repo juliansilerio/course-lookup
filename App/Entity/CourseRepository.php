@@ -7,10 +7,15 @@ use Doctrine\ORM\Query;
 
 class CourseRepository extends EntityRepository {
 
+    public function make_qb() {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb;
+    }
+    
     public function find_course($subject, $bulletin_prefix, $course_number) {
-        $qb = $em->createQueryBuilder();
+        $qb = $this->make_qb();
         $query = $qb->select('course')
-            ->from('Course', 'course')
+            ->from('App\Entity\Course', 'course')
             ->where(
                 $qb->expr()->eq('course.subject', ':subj'),
                 $qb->expr()->eq('course.bulletin_prefix', ':prefix'),
@@ -21,6 +26,26 @@ class CourseRepository extends EntityRepository {
             ->setParameter(':number', $course_number);
         
         return $query->getQuery();
+    }
+
+    public function most_courses() {
+        $qb = $this->make_qb();
+        $query = $qb->select('course.department, COUNT(course.department) ct')
+            ->from('App\Entity\Course', 'course')
+            ->groupBy('course.department')
+            ->orderBy('ct', 'DESC');
+
+        return $query->getQuery();
+    }
+
+    public function most_used_words() {
+        $qb = $this->make_qb();
+        $query = $qb->select('course.name')
+            ->from('App\Entity\Course', 'course')
+            ->groupBy('course.name');
+        return $query->getQuery();
+         
+
     }
 
 }

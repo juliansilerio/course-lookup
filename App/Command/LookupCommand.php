@@ -30,7 +30,7 @@ class LookupCommand extends AbstractCommand {
 
         if($call_number) {
             $lookup = new LookupService($this->em);
-            $result = $lookup->lookupCourse($call_number);
+            $result = $lookup->lookup_course($call_number);
         }
 
         if(!$result) {
@@ -46,6 +46,7 @@ class LookupCommand extends AbstractCommand {
             ->setHeaders(array('Academic Department', 'Subject Area', 'School Bulletin Prefix', 'Course Number', 'Name', 'Min Points', 'Max Points'));
 
         foreach($results as $result) {
+            array_shift($result);
             $table->addRow($result);
         }
 
