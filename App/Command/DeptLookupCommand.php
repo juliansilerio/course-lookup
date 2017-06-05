@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\LookupService;
+use App\Service\DeptLookupService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,30 +11,30 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\Table;
 
-class LookupCommand extends AbstractCommand {
+class DeptLookupCommand extends AbstractCommand {
 
     protected function configure () {
         $this
-            ->setName('lookup')
-            ->setDescription('look up a course')
+            ->setName('dept lookup')
+            ->setDescription('look up courses in a department')
             ->addArgument(
-                'call number',
+                'department',
                 InputArgument::REQUIRED,
-                'look up a course based on a call number'
+                'look up courses based on a department'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $call_number = $input->getArgument('call number');
+        $department = $input->getArgument('department');
 
-        if($call_number) {
-            $lookup = new LookupService($this->em);
-            $result = $lookup->lookup_course($call_number);
+        if($department) {
+            $lookup = new DeptLookupService($this->em);
+            $result = $lookup->department_lookup($department);
         }
 
         if(!$result) {
-            $output->writeln("<error>The course $call_number was not found </error>");
+            $output->writeln("<error>The department $department was not found </error>");
         } else {
             $this->make_table($output, $result);
         }

@@ -23,17 +23,18 @@ class StatsService {
         
         $words = array();
         $array = $result->getArrayResult();
-        foreach($array as $row) {
-            print $row[1]."\n";            
-            $strings = explode(" ", strtolower($row));
-            
-            foreach($strings as $string) {
-                print $string."\n";
-                if(!array_key_exists($string, $words)) {
-                    $words[$string] = 1;
-                } else {
-                    $words[$string] = $words[$string] + 1;   
-                }
+        foreach($array as $row) {                           # top level data containing entire table           
+            foreach($row as $key => $string) {              # row data 
+                $strings = explode(" ", strtolower($string));
+                
+                foreach($strings as $word) {
+                    //print $word."\n";
+                    if(!array_key_exists($word, $words)) {
+                        $words[$word] = 1;
+                    } else {
+                        $words[$word] = $words[$word] + 1;   
+                    }
+                }   
             } 
         }   
         arsort($words);

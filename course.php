@@ -5,6 +5,7 @@ require __DIR__.'/vendor/autoload.php';
 use App\Command\ImportCommand;
 use App\Command\LookupCommand;
 use App\Command\StatsCommand;
+use App\Command\DeptLookupCommand;
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -23,6 +24,7 @@ $application = new Application();
 $application->add(new ImportCommand($em));
 $application->add(new LookupCommand($em));
 $application->add(new StatsCommand($em));
+$application->add(new DeptLookupCommand($em));
 $application->run();
 
 ?>

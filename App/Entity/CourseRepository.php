@@ -48,6 +48,17 @@ class CourseRepository extends EntityRepository {
 
     }
 
+    public function department_lookup($department) {
+        $qb = $this->make_qb();
+        $query = $qb->select('course')
+            ->from('App\Entity\Course', 'course')
+            ->where(
+                $qb->expr()->eq('course.department', ':department')
+            )
+            ->setParameter(':department', $department);
+        return $query->getQuery();
+    }
+
 }
 
 ?>
