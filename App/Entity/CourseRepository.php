@@ -44,18 +44,16 @@ class CourseRepository extends EntityRepository {
             ->from('App\Entity\Course', 'course')
             ->groupBy('course.name');
         return $query->getQuery();
-         
-
     }
 
-    public function department_lookup($department) {
+    public function column_lookup($column, $arg) {
         $qb = $this->make_qb();
         $query = $qb->select('course')
             ->from('App\Entity\Course', 'course')
             ->where(
-                $qb->expr()->eq('course.department', ':department')
+                $qb->expr()->eq('course.'.$column, ':arg')
             )
-            ->setParameter(':department', $department);
+            ->setParameter(':arg', $arg);
         return $query->getQuery();
     }
 

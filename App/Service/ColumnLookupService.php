@@ -5,16 +5,16 @@ namespace App\Service;
 //use App\Entity\CourseRepository;
 use Doctrine\ORM\EntityManager;
 
-class DeptLookupService {
+class ColumnLookupService {
     protected $em;
 
     public function __construct(EntityManager $em) {
         $this->em=$em;
     }
 
-    public function department_lookup($dept) {
+    public function column_lookup($column, $arg) {
         $repo = $this->em->getRepository('App\Entity\Course');
-        $result = $repo->department_lookup($dept);
+        $result = $repo->column_lookup($column, $arg);
         return $result->getArrayResult();
     }
 }

@@ -22,7 +22,7 @@ class ImportService {
         echo $total=count(file($this->filename)) . "\n";
         $counter = 0;
         
-        $batch_size = 100;
+        $batch_size = 20;
         while($line=fgetcsv($file)) {
             $department = $line[0];
             $subject = $line[1];
@@ -51,6 +51,9 @@ class ImportService {
                 $this->em->clear();
             }
         }
+
+        $this->em->flush();
+        $this->em->clear();
 
         fclose($file);
            
