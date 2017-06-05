@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\ColumnLookupService;
+use App\Service\FindService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,36 +11,30 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\Table;
 
-class ColumnLookupCommand extends AbstractCommand {
+class FindCommand extends AbstractCommand {
 
     protected function configure () {
         $this
-            ->setName('column')
-            ->setDescription('look up courses by a certain column filter')
+            ->setName('find')
+            ->setDescription('find a course based on a word in its name')
             ->addArgument(
-                'column',
+                'word',
                 InputArgument::REQUIRED,
-                'look up courses based on a column'
-            )
-            ->addArgument(
-                'arg',
-                InputArgument::REQUIRED,
-                'what to search column against'
+                'find a course based on its name'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $column = $input->getArgument('column');
-        $argument = $input->getArgument('arg');
- 
-        if($column) {
-            $lookup = new ColumnLookupService($this->em);
-            $result = $lookup->column_lookup($column, $argument);
+        $word = $input->getArgument('word');
+
+        if($word) {
+            $find = new FindService($this->em);
+            $result = $find->find_word($word);
         }
 
         if(!$result) {
-            $output->writeln("<error>The column '$column' or argument '$argument'  was not found </error>");
+            $output->writeln("<error>The word $call_number was not found in the name of a course </error>");
         } else {
             $this->make_table($output, $result);
         }

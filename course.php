@@ -6,6 +6,7 @@ use App\Command\ImportCommand;
 use App\Command\LookupCommand;
 use App\Command\StatsCommand;
 use App\Command\ColumnLookupCommand;
+use App\Command\FindCommand;
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -25,6 +26,7 @@ $application->add(new ImportCommand($em));
 $application->add(new LookupCommand($em));
 $application->add(new StatsCommand($em));
 $application->add(new ColumnLookupCommand($em));
+$application->add(new FindCommand($em));
 $application->run();
 
 ?>

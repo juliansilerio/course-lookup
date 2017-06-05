@@ -43,7 +43,7 @@ class LookupCommand extends AbstractCommand {
     protected function make_table(OutputInterface $output, array $results) {
         $table = new Table($output);
         $table
-            ->setHeaders(array('Academic Department', 'Subject Area', 'School Bulletin Prefix', 'Course Number', 'Name', 'Min Points', 'Max Points'));
+            ->setHeaders(array('Academic Department', 'Subject Area', 'Bulletin Prefix', 'Course Number', 'Name', 'Min Points', 'Max Points'));
 
         foreach($results as $result) {
             array_shift($result);

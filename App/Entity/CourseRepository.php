@@ -57,6 +57,16 @@ class CourseRepository extends EntityRepository {
         return $query->getQuery();
     }
 
+    public function find_word($word) {
+        $qb = $this->make_qb();
+        $query = $qb->select('course')
+            ->from('App\Entity\Course', 'course')
+            ->where('course.name like :name')
+            ->setParameter('name', '%'.$word.'%');
+        return $query->getQuery();
+
+    }
+
 }
 
 ?>
