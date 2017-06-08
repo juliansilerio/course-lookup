@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace src\course_lookup\Service;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,13 +12,13 @@ class StatsService {
     }
 
     public function most_courses() {
-        $repo = $this->em->getRepository('App\Entity\Course');
+        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
         $result = $repo->most_courses();
         return $result->getArrayResult();
     }
 
-     public function most_used_words() {
-        $repo = $this->em->getRepository('App\Entity\Course');
+    public function most_used_words() {
+        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
         $result = $repo->most_used_words();
         
         $words = array();
@@ -41,7 +41,22 @@ class StatsService {
         
 
         return $words;
-    }   
+    }
+    
+    /**
+
+    **********************
+    *    UNIMPLEMENTED   *
+    ********************** 
+
+    public function number_course_levels() {
+        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
+        $result = $repo->number_course_levels();
+        return $result->getArrayResult();
+    }  
+
+     */
+       
 
 
 }

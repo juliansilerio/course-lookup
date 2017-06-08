@@ -2,11 +2,12 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use App\Command\ImportCommand;
-use App\Command\LookupCommand;
-use App\Command\StatsCommand;
-use App\Command\ColumnLookupCommand;
-use App\Command\FindCommand;
+use src\course_lookup\Command\ImportCommand;
+use src\course_lookup\Command\LookupCommand;
+use src\course_lookup\Command\StatsCommand;
+use src\course_lookup\Command\ColumnLookupCommand;
+use src\course_lookup\Command\FindCommand;
+use src\course_lookup\Command\AdvLookupCommand;
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -27,6 +28,7 @@ $application->add(new LookupCommand($em));
 $application->add(new StatsCommand($em));
 $application->add(new ColumnLookupCommand($em));
 $application->add(new FindCommand($em));
+$application->add(new AdvLookupCommand($em));
 $application->run();
 
 ?>

@@ -1,5 +1,4 @@
-<?php
-    //print $argv[1] . " " . $argv[2];
+<?php    
     if(count($argv)<2) {
         print "no command given, try import or lookup\n";
     }

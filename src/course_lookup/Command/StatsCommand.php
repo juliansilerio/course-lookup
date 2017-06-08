@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Command;
+namespace src\course_lookup\Command;
 
-use App\Service\StatsService;
+use src\course_lookup\Service\StatsService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,10 +37,10 @@ class StatsCommand extends AbstractCommand {
         }       
         
         $most_courses = $stats->most_courses();
-        $most_used_words = $stats->most_used_words();
+        $most_used_words = $stats->most_used_words();     
 
         $this->make_table_index($output, $most_courses, array('Academic Department', 'Number of Courses'), 5);
-        $this->make_table_assoc($output, $most_used_words, array('Word', 'Frequency'), 10, $excluded);        
+        $this->make_table_assoc($output, $most_used_words, array('Word', 'Frequency'), 10, $excluded);
 
     }
 

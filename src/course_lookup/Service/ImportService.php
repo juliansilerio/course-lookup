@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace src\course_lookup\Service;
 
-use App\Entity\Course;
+use src\course_lookup\Entity\Course;
 use Doctrine\ORM\EntityManager;
 
 class ImportService {

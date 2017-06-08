@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Service;
+namespace src\course_lookup\Service;
 
-//use App\Entity\CourseRepository;
 use Doctrine\ORM\EntityManager;
 
 class FindService {
@@ -13,7 +12,7 @@ class FindService {
     }
 
     public function find_word($word) {
-        $repo = $this->em->getRepository('App\Entity\Course');
+        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
         $result = $repo->find_word($word);
         return $result->getArrayResult();
     }

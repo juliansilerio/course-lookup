@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Service;
+namespace src\course_lookup\Service;
 
-//use App\Entity\CourseRepository;
 use Doctrine\ORM\EntityManager;
 
 class ColumnLookupService {
@@ -13,7 +12,7 @@ class ColumnLookupService {
     }
 
     public function column_lookup($column, $arg) {
-        $repo = $this->em->getRepository('App\Entity\Course');
+        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
         $result = $repo->column_lookup($column, $arg);
         return $result->getArrayResult();
     }

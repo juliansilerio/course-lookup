@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Service;
+namespace src\course_lookup\Service;
 
-//use App\Entity\CourseRepository;
 use Doctrine\ORM\EntityManager;
 
 class LookupService {
@@ -27,7 +26,7 @@ class LookupService {
         
         print "$subject $prefix$number\n";
 
-        $repo = $this->em->getRepository('App\Entity\Course');
+        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
         $result = $repo->find_course($subject, $prefix, $number);
         return $result->getArrayResult();
     }

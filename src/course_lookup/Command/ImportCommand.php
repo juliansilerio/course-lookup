@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Command;
+namespace src\course_lookup\Command;
 
-use App\Service\ImportService;
+use src\course_lookup\Service\ImportService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Command;
+namespace src\course_lookup\Command;
 
-use App\Service\FindService;
+use src\course_lookup\Service\ColumnLookupService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,30 +11,36 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\Table;
 
-class FindCommand extends AbstractCommand {
+class ColumnLookupCommand extends AbstractCommand {
 
     protected function configure () {
         $this
-            ->setName('find')
-            ->setDescription('find a course based on a word in its name')
+            ->setName('column')
+            ->setDescription('look up courses by a certain column filter')
             ->addArgument(
-                'word',
+                'column',
                 InputArgument::REQUIRED,
-                'find a course based on its name'
+                'look up courses based on a column'
+            )
+            ->addArgument(
+                'arg',
+                InputArgument::REQUIRED,
+                'what to search column against'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $word = $input->getArgument('word');
-
-        if($word) {
-            $find = new FindService($this->em);
-            $result = $find->find_word($word);
+        $column = $input->getArgument('column');
+        $argument = $input->getArgument('arg');
+ 
+        if($column) {
+            $lookup = new ColumnLookupService($this->em);
+            $result = $lookup->column_lookup($column, $argument);
         }
 
         if(!$result) {
-            $output->writeln("<error>The word $call_number was not found in the name of a course </error>");
+            $output->writeln("<error>The column '$column' or argument '$argument'  was not found </error>");
         } else {
             $this->make_table($output, $result);
         }

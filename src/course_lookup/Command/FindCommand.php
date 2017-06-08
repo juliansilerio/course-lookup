@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Command;
+namespace src\course_lookup\Command;
 
-use App\Service\LookupService;
+use src\course_lookup\Service\FindService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,30 +11,30 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\Table;
 
-class LookupCommand extends AbstractCommand {
+class FindCommand extends AbstractCommand {
 
     protected function configure () {
         $this
-            ->setName('lookup')
-            ->setDescription('look up a course')
+            ->setName('find')
+            ->setDescription('find a course based on a word in its name')
             ->addArgument(
-                'call number',
+                'word',
                 InputArgument::REQUIRED,
-                'look up a course based on a call number'
+                'keyword against which to search'
             )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $call_number = $input->getArgument('call number');
+        $word = $input->getArgument('word');
 
-        if($call_number) {
-            $lookup = new LookupService($this->em);
-            $result = $lookup->lookup_course($call_number);
+        if($word) {
+            $find = new FindService($this->em);
+            $result = $find->find_word($word);
         }
 
         if(!$result) {
-            $output->writeln("<error>The course $call_number was not found </error>");
+            $output->writeln("<error>The word $call_number was not found in the name of a course </error>");
         } else {
             $this->make_table($output, $result);
         }
@@ -43,7 +43,7 @@ class LookupCommand extends AbstractCommand {
     protected function make_table(OutputInterface $output, array $results) {
         $table = new Table($output);
         $table
-            ->setHeaders(array('Academic Department', 'Subject Area', 'Bulletin Prefix', 'Course Number', 'Name', 'Min Points', 'Max Points'));
+            ->setHeaders(array('Acad. Department', 'Subject Area', 'Bulletin Prefix', 'Course Number', 'Name', 'Min Points', 'Max Points'));
 
         foreach($results as $result) {
             array_shift($result);
