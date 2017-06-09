@@ -42,21 +42,7 @@ class StatsService {
 
         return $words;
     }
-    
-    /**
-
-    **********************
-    *    UNIMPLEMENTED   *
-    ********************** 
-
-    public function number_course_levels() {
-        $repo = $this->em->getRepository('src\course_lookup\Entity\Course');
-        $result = $repo->number_course_levels();
-        return $result->getArrayResult();
-    }  
-
-     */
-       
+      
 
 
 }

@@ -38,10 +38,9 @@ class StatsCommand extends AbstractCommand {
         
         $most_courses = $stats->most_courses();
         $most_used_words = $stats->most_used_words();     
-
+        
         $this->make_table_index($output, $most_courses, array('Academic Department', 'Number of Courses'), 5);
         $this->make_table_assoc($output, $most_used_words, array('Word', 'Frequency'), 10, $excluded);
-
     }
 
     protected function make_table_index(OutputInterface $output, array $results, array $headers, $count) {

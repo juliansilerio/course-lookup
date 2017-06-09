@@ -4,6 +4,8 @@ namespace src\course_lookup\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Configuration;
 
 class CourseRepository extends EntityRepository {
 
@@ -45,26 +47,22 @@ class CourseRepository extends EntityRepository {
             ->groupBy('course.name');
         return $query->getQuery();
     }
-
-    /**
-    
-    *********************
-    *   UNIMPLEMENTED   *
-    *********************
-    
+   
     public function number_course_levels() {
-        $qb = $this->make_qb();
-        
-        $query = $qb->add('select','c.department, ints.start, count(*)') 
-            ->add('from',  'course c, ints') 
-            ->add('where', 'c.course_number >= ints.start and c.course_number <= ints.end') 
-            ->add('groupBy', 'c.department, ints.start');
-        return $query->getQuery();
-        
+        $config = new Configuration();
+        $connectionParams = array(
+            'url' => 'sqlite:///db.sqlite'  
+        );
+        $conn = DriverManager::getConnection($connectionParams, $config);
 
+        $sql = <<<EOT
+            SELECT c.department, ints.start, count(*) 
+            FROM course c, ints 
+            WHERE c.course_number >= ints.start and c.course_number <= ints.end 
+            GROUP BY c.department, ints.start; 
+EOT;
+        return $conn->fetchAll($sql);
     }
-
-    */
 
     public function column_lookup($column, $arg) {
         $qb = $this->make_qb();

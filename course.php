@@ -8,6 +8,7 @@ use src\course_lookup\Command\StatsCommand;
 use src\course_lookup\Command\ColumnLookupCommand;
 use src\course_lookup\Command\FindCommand;
 use src\course_lookup\Command\AdvLookupCommand;
+use src\course_lookup\Command\CourseLevelsCommand;
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -29,6 +30,7 @@ $application->add(new StatsCommand($em));
 $application->add(new ColumnLookupCommand($em));
 $application->add(new FindCommand($em));
 $application->add(new AdvLookupCommand($em));
+$application->add(new CourseLevelsCommand($em));
 $application->run();
 
 ?>
